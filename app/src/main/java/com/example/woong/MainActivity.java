@@ -2,7 +2,6 @@ package com.example.woong;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String userId;
     private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                                     //updateUI(null);
                                 }
-
                                 // ...
                             }
                         });
@@ -90,9 +89,10 @@ public class MainActivity extends AppCompatActivity {
         LogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String stEmail = EditTextEmail.getText().toString();
                 String stPass  = EditTextPassword.getText().toString();
-                //userId  = mAuth.getCurrentUser().getUid();
+                userId  = mAuth.getCurrentUser().getUid();
                 mAuth.signInWithEmailAndPassword(stEmail, stPass)
                         .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
 
                                     Log.d(TAG, "signInWithEmail:success");
-                                    Toast.makeText(MainActivity.this, "Log in: success.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Log in: success."+userId, Toast.LENGTH_LONG      ).show();
 
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Intent intent = new Intent(MainActivity.this, OpenActivity.class);
