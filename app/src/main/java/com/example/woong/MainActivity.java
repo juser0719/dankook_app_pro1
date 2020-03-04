@@ -112,16 +112,17 @@ public class MainActivity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
 
                                     Log.d(TAG, "signInWithEmail:success");
-                                    Toast.makeText(MainActivity.this, "Log in: success."+userId, Toast.LENGTH_LONG      ).show();
+                                    Toast.makeText(MainActivity.this, "Log in: success!! :)", Toast.LENGTH_LONG).show();
 
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Intent intent = new Intent(MainActivity.this, OpenActivity.class);
                                     intent.putExtra("uid",userId);
                                     startActivity(intent);
+                                    finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "Log_In:failure", task.getException());
-                                    Toast.makeText(MainActivity.this, "Log in : failed.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Log in : failed. check again plz :)", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
@@ -142,24 +143,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
- /*   public void creatData (View v){
-        String stEmail = EditTextEmail.getText().toString();
-        Map<String , Object> note = new HashMap<>();
-        note.put("name", stEmail);
-        ref.set(note)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + ref.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
 
-    }*/
 
 }
