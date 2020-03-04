@@ -11,10 +11,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button LogButton;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String userId;
+
     private static final String TAG = "MainActivity";
 
     @Override
@@ -34,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         EditTextEmail = (EditText) findViewById(R.id.email);
         EditTextPassword = (EditText) findViewById(R.id.password);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener =new FirebaseAuth.AuthStateListener() {
@@ -92,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
 
                 String stEmail = EditTextEmail.getText().toString();
                 String stPass  = EditTextPassword.getText().toString();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
                 userId  = mAuth.getCurrentUser().getUid();
+                DocumentReference ref = db.collection("open").document(userId);
                 mAuth.signInWithEmailAndPassword(stEmail, stPass)
                         .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -105,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Intent intent = new Intent(MainActivity.this, OpenActivity.class);
+                                    intent.putExtra("uid",userId);
                                     startActivity(intent);
                                 } else {
                                     // If sign in fails, display a message to the user.
@@ -129,4 +141,25 @@ public class MainActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
+ /*   public void creatData (View v){
+        String stEmail = EditTextEmail.getText().toString();
+        Map<String , Object> note = new HashMap<>();
+        note.put("name", stEmail);
+        ref.set(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + ref.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
+    }*/
+
 }
