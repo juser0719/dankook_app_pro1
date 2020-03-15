@@ -62,6 +62,23 @@ public class OpenActivity extends AppCompatActivity {
                 }
             }
         });
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Boolean open_state =(Boolean) document.get("open");
+                        open.setChecked(open_state);
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
 
         open.setOnCheckedChangeListener(new openSwitchListener());
     }
@@ -76,11 +93,11 @@ public class OpenActivity extends AppCompatActivity {
 
                 docRef.update("open",true)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "open: successfully updated!");
-                    }
-                })
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "open: successfully updated!");
+                            }
+                        })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {

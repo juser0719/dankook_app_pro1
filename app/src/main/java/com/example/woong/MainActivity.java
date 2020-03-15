@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private Button LogButton;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String userId;
-    private String loginId, loginPwd;
+    private String loginId, loginPwd, loginUid;
 
     private static final String TAG = "MainActivity";
 
