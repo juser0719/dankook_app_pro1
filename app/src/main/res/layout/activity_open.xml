@@ -23,22 +23,13 @@
         android:layout_width="match_parent"
         android:layout_height="80dp" />
 
-    <Switch
-        android:id="@+id/switch2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="OPEN"
-        android:textSize="20dp" />
-
     <CheckBox
         android:id="@+id/bottonOnOff"
-        android:layout_width="604dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="bottom|center"
         android:background="@android:color/transparent"
-        android:drawableBottom="@drawable/btn_onoff"
-        android:scaleType="fitCenter"
+        android:button="@drawable/btn_onoff"
         android:src="@drawable/btn_onoff" />
 
 

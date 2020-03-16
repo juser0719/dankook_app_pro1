@@ -26,9 +26,8 @@ import java.util.Map;
 
 public class OpenActivity extends AppCompatActivity {
 
-    private Switch open;
     private TextView hi;
-    private CheckBox onoff; //
+    private CheckBox onoff;
     String UId;
     private FirebaseAuth auth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -43,8 +42,7 @@ public class OpenActivity extends AppCompatActivity {
         UId = intent.getStringExtra("uid");
         auth = FirebaseAuth.getInstance();
 
-        onoff = findViewById(R.id.bottonOnOff); //
-        open = (Switch)findViewById(R.id.switch2);
+        onoff = (CheckBox) findViewById(R.id.bottonOnOff);
         hi = (TextView)findViewById(R.id.hello);
 
         DocumentReference docRef = db.collection("open").document(UId);
@@ -72,7 +70,7 @@ public class OpenActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Boolean open_state =(Boolean) document.get("open");
-                        open.setChecked(open_state);
+                        onoff.setChecked(open_state);
 
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                     } else {
@@ -84,7 +82,7 @@ public class OpenActivity extends AppCompatActivity {
             }
         });
 
-        open.setOnCheckedChangeListener(new openSwitchListener());
+        onoff.setOnCheckedChangeListener(new openSwitchListener());
     }
     class openSwitchListener implements CompoundButton.OnCheckedChangeListener{
         @Override
