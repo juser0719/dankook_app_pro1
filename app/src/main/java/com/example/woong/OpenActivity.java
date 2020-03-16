@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class OpenActivity extends AppCompatActivity {
 
     private Switch open;
     private TextView hi;
+    private CheckBox onoff; //
     String UId;
     private FirebaseAuth auth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -41,6 +43,7 @@ public class OpenActivity extends AppCompatActivity {
         UId = intent.getStringExtra("uid");
         auth = FirebaseAuth.getInstance();
 
+        onoff = findViewById(R.id.bottonOnOff); //
         open = (Switch)findViewById(R.id.switch2);
         hi = (TextView)findViewById(R.id.hello);
 
@@ -70,6 +73,7 @@ public class OpenActivity extends AppCompatActivity {
                     if (document.exists()) {
                         Boolean open_state =(Boolean) document.get("open");
                         open.setChecked(open_state);
+
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                     } else {
                         Log.d(TAG, "No such document");
