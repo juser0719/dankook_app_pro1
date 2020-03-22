@@ -106,7 +106,7 @@ public class OpenActivity extends AppCompatActivity {
                                 Log.w(TAG, "Error updating document", e);
                             }
                         });
-                Toast.makeText(OpenActivity.this, "open!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OpenActivity.this, "open!! 사장님 오늘도 화이팅!!", Toast.LENGTH_SHORT).show();
             }
             else {    //close
                 docRef.update("open",false)
