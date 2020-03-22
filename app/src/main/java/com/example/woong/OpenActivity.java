@@ -122,7 +122,7 @@ public class OpenActivity extends AppCompatActivity {
                                 Log.w(TAG, "Error updating document", e);
                             }
                         });
-                Toast.makeText(OpenActivity.this, "closed!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OpenActivity.this, "closed!! 오늘도 고생하셨습니다!!", Toast.LENGTH_SHORT).show();
             }
         }
     }
